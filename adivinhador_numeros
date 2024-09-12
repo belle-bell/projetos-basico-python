@@ -1,0 +1,78 @@
+'''
+Adivinhador de números -----------------------------------------
+'''
+
+import random
+
+def show_score(lista_tentativas):
+    if not lista_tentativas:
+        print('Ainda não possui melhor pontuação no momento\n')
+
+    else: 
+        print(f'A melhor pontuação no momento é:'
+              f'{min(lista_tentativas)}\n')
+
+
+
+def start_game():
+    attempts = 0
+    rand_num = random.randint(1, 10)
+    lista_tentativas = []
+
+    print('Olá! Bem vindo ao jogo de adivinhação')
+    player_name = input('Qual seu nome?\n')
+    wanna_play = input(
+        f'Olá, {player_name}, gostaria de jogar? (Digite Sim/Nao): ')
+    
+    if wanna_play.lower() != 'sim':
+        print('Okay, até a próxima')
+        exit()
+    else:
+        show_score(lista_tentativas)
+
+    while wanna_play.lower() == 'sim':
+        try:
+            guess = int(input('Escolha um número entre 1 e 10\n'))
+            if guess < 1 or guess > 10:
+                raise ValueError(
+                    'Porvafor escolha um número válido'
+                )
+            attempts += 1
+
+            if guess == rand_num:
+                lista_tentativas.append(attempts)
+                print('___________________________________________________________________')
+                print('Boa! Você acertou!')
+                print('___________________________________________________________________')
+                print(f'Você levou {attempts} tentativas para acertar')
+                print('___________________________________________________________________')
+
+                wanna_play = input(
+                    'Gostaria de jogar de novo? (Digite Sim/Nao) ')
+                if wanna_play.lower() != 'sim': 
+                    print('Okay, até a próxima '
+                          f'{player_name}')
+
+                    break
+                else:
+                    attempts = 0
+                    rand_num = random.randint(1, 10)
+                    show_score(lista_tentativas)
+                    continue
+            else:
+                if guess > rand_num:
+                    print('O número é menor\n')
+                elif guess < rand_num:
+                    print('O número é maior\n')
+
+        except ValueError as err:
+            print('Esse valor não é valido, tente novamente')
+            print(err)
+
+
+
+
+
+if __name__ == '__main__':
+    start_game()
+                    

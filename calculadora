@@ -1,0 +1,156 @@
+'''
+Calculadora
+'''
+
+import os
+
+def addition():
+    os.system('cls' if os.name == 'nt' else 'clear')
+    print('Adição')
+
+    continue_calc = 'y'
+
+    num_1 = float(input('Digite um número: '))
+    num_2 = float(input('Digite outro número: '))
+    ans = num_1 + num_2
+    values_entered = 2
+    print(f'Valor atual: {ans}')
+
+    while continue_calc.lower() == 'y':
+        continue_calc = (input('Adicionar mais um número? (s\n): '))
+        while continue_calc.lower() not in ['s', 'n']:
+            print('Por favor digite \'s\' or \'n\'')
+            continue_calc = input('Adicionar mais um número? (s\n): ')
+
+        if continue_calc.lower() == 'n':
+            break
+        num = float(input('Digite mais um núemero: '))
+        ans += num
+        print(f'Valor atual: {ans}')
+        values_entered += 1
+    return [ans, values_entered]
+
+
+
+def subtraction():
+    os.system('cls' if os.name == 'nt' else 'clear')
+    print('Subtração')
+
+    continue_calc = 'y'
+
+    num_1 = float(input('Digite um número: '))
+    num_2 = float(input('Digite outro número: '))
+    ans = num_1 - num_2
+    values_entered = 2
+    print(f'Valor atual: {ans}')
+
+    while continue_calc.lower() == 'y':
+        continue_calc = (input('Subtrair mais um número? (s\n): '))
+        while continue_calc.lower() not in ['s', 'n']:
+            print('Por favor digite \'s\' or \'n\'')
+            continue_calc = input('Subtrair mais um número? (s\n): ')
+
+        if continue_calc.lower() == 'n':
+            break
+        num = float(input('Digite mais um núemero: '))
+        ans -= num
+        print(f'Valor atual: {ans}')
+        values_entered += 1
+    return [ans, values_entered]   
+
+
+def multiplication():
+    os.system('cls' if os.name == 'nt' else 'clear')
+    print('Multiplicação')
+
+    continue_calc = 'y'
+
+    num_1 = float(input('Digite um número: '))
+    num_2 = float(input('Digite outro número: '))
+    ans = num_1 * num_2
+    values_entered = 2
+    print(f'Valor atual: {ans}')
+
+    while continue_calc.lower() == 'y':
+        continue_calc = (input('Multiplicar com mais um número? (s\n): '))
+        while continue_calc.lower() not in ['s', 'n']:
+            print('Por favor digite \'s\' or \'n\'')
+            continue_calc = input('Multiplicar com mais um número? (s\n): ')
+
+        if continue_calc.lower() == 'n':
+            break
+        num = float(input('Digite mais um núemero: '))
+        ans *=  num
+        print(f'Valor atual: {ans}')
+        values_entered += 1
+    return [ans, values_entered] 
+
+
+def division():
+    os.system('cls' if os.name == 'nt' else 'clear')
+    print('Divisão')
+
+    continue_calc = 'y'
+
+    num_1 = float(input('Digite um número: '))
+    num_2 = float(input('Digite outro número: '))
+    while num_2 == 0.0:
+        print('Por favor digite um segundo número > 0 ')
+        num_2 = float(input('Digite outro número: '))
+
+    ans = num_1 / num_2
+    values_entered = 2
+    print(f'Valor atual: {ans}') 
+
+    while continue_calc.lower() == 'y':
+        continue_calc = (input('Multiplicar com mais um número? (s\n): '))
+        while continue_calc.lower() not in ['s', 'n']:
+            print('Por favor digite \'s\' or \'n\'')
+            continue_calc = input('Multiplicar com mais um número? (s\n): ')
+
+        if continue_calc.lower() == 'n':
+            break
+        num = float(input('Digite mais um núemero: '))
+        while num == 0.0: 
+            print('Por favor digite um número > 0')
+            num = float(input('Digite outro número: '))
+
+        ans /= num
+        print(f'Valor atual: {ans}')
+        values_entered += 1
+    return [ans, values_entered]  
+
+
+def calculadora():
+    quit = False
+    while not quit:
+        print('Calculadora simples!')
+        print('Digite \'a\' para adição')
+        print('Digite \'s\' para subtração')
+        print('Digite \'m\' para multipliação')
+        print('Digite \'d\' para divisão')
+        print('Digite \'x\' para sair')
+
+        choice = input('Sua escolha: ')
+
+        if choice == 'x':
+            quit = True
+            continue
+
+        if choice == 'a':
+            results = addition()
+            print('Resultado = ', results[0], '\ntotal de números inseridos:', results[1])
+        elif choice == 's':
+            results = subtraction()
+            print('Resultado = ', results[0], '\ntotal de números inseridos:', results[1])
+        elif choice == 'm':
+            results = multiplication()
+            print('Resultado = ', results[0], '\ntotal de números inseridos:', results[1])
+        elif choice == 'd':
+            results = division()
+            print('Resultado = ', results[0], '\ntotal de números inseridos:', results[1])
+        else:
+            print('Escolha invalida')
+
+if __name__ == '__main__':
+    calculadora()

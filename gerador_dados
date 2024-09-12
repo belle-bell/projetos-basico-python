@@ -1,0 +1,53 @@
+'''
+Gerador de rolagem de dados
+'''
+
+import random
+import os
+
+
+def n_dice():
+    while True:
+        try:
+            num_dice = input('Número de dados a serem rolados - Digite 1 ou 2\n')
+            valid_responses = ['1', 'um', 'dois', '2']
+            if num_dice not in valid_responses:
+                raise ValueError('Digite 1 ou 2 apenas\n')
+            else:
+                return num_dice
+        except ValueError as err:
+            print(err)
+
+
+
+def roll_dice():
+    min_val = 1
+    max_val = 6
+    roll_again = 's'
+
+    while roll_again.lower() == 'sim' or roll_again.lower() == 'y':
+        os.system('cls' if os.name == 'nt' else 'clear')
+        amount = n_dice()
+
+        if amount == '2' or amount == 'two':
+            print('Rolando os dados...')
+            dice_1 = random.randint(min_val, max_val)
+            dice_2 = random.randint(min_val, max_val)
+
+            print('Valores dos dados:')
+            print('Dado 1:', dice_1)
+            print('Dado 2:', dice_2)
+            print('Total:',dice_1 + dice_2)
+
+            roll_again = input('Rolar de novo?\n')
+        else:
+            print('Rolando dado...')
+            dice_1 = random.randint(min_val, max_val)
+            print(f'Valor do dado: {dice_1}')
+
+            roll_again = input('Rolar de novo?\n')
+
+
+
+if __name__ == '__main__':
+    roll_dice()

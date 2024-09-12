@@ -1,0 +1,78 @@
+'''
+-----------------------------------------------------------------------------
+Pedra Papel Tesoura 
+-----------------------------------------------------------------------------
+'''
+import random
+import os
+import re
+
+
+def check_play_status(user_name, user_score, computer_score):
+    respostas = ['sim', 'nao']
+    while True:
+        try:
+            resposta = input('Você quer jogar novamente? (Digite sim ou nao)\n')
+            if resposta.lower() not in respostas:
+                raise ValueError('Digite novamente\n')
+            
+            if resposta.lower() == 'sim':
+                return True 
+            else:
+                os.system('cls' if os.name == 'nt' else 'clear')
+                print('Obrigado por jogar!')
+                print(f'Pontuação total - {user_name} : {user_score}, Computador: {computer_score}')
+                exit()
+
+        except ValueError as err:
+            print(err)
+
+def play_ppt():
+    user_name = input('Digite seu nome: ')
+    user_score = 0
+    computer_score = 0 
+    play = True
+
+    while play:
+        os.system('cls' if os.name == 'nt' else 'clear')
+        print('------------------------------------------------------------')
+        print('Vamos jogar Pedra, Papel, Tesoura')
+        print('------------------------------------------------------------')
+
+        user_choice = input('Escolha sua jogada - Digite: Pedra / Papel / Tesoura\n')
+
+        if not re.match(r"^(pedra|papel|tesoura)$", user_choice.lower()):
+            print('Escolha uma opção disponível - Pedra / Papel / Tesoura')
+            continue
+
+        print(f'\nVocê escolheu: {user_choice}')
+
+        choices = ['pedra', 'papel', 'tesoura']
+        opp_choice = random.choice(choices)
+
+        print(f'Eu escolho: {opp_choice}\n')
+
+        if opp_choice == user_choice.lower():
+            print('------------------------------------------------------------')
+            print('Empate!!')
+            print('------------------------------------------------------------')
+        elif opp_choice == 'pedra' and user_choice.lower() == 'tesoura':
+            print('Pedra ganha de tesoura, eu ganhei!\n')
+            computer_score += 1
+        elif opp_choice == 'tesoura' and user_choice.lower() == 'papel':
+            print('Tesoura ganha de papel, eu ganhei!\n')
+            computer_score += 1
+        elif opp_choice == 'papel' and user_choice.lower() == 'pedra':
+            print('Papel ganha de pedra, eu ganhei!\n')
+            computer_score += 1
+        else: 
+            print('------------------------------------------------------------')
+            print('Você Ganhou')
+            print('------------------------------------------------------------')
+            user_score += 1
+        
+        print(f'Pontuação - {user_name}: {user_score}, Computador: {computer_score}')
+        play = check_play_status(user_name, user_score, computer_score)
+
+if __name__ == '__main__':
+    play_ppt()
