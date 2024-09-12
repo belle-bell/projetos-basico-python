@@ -9,12 +9,12 @@ import os
 def n_dice():
     while True:
         try:
-            num_dice = input('Número de dados a serem rolados - Digite 1 ou 2\n')
-            valid_responses = ['1', 'um', 'dois', '2']
+            num_dice = input('Número de dados a serem rolados - Digite 1 ou 2\n').strip()
+            valid_responses = ['1', '2']
             if num_dice not in valid_responses:
                 raise ValueError('Digite 1 ou 2 apenas\n')
             else:
-                return num_dice
+                return int(num_dice)  # Retorna um número inteiro para facilitar comparações
         except ValueError as err:
             print(err)
 
@@ -25,11 +25,11 @@ def roll_dice():
     max_val = 6
     roll_again = 's'
 
-    while roll_again.lower() == 'sim' or roll_again.lower() == 'y':
+    while roll_again.lower() in ['sim', 's', 'y']:
         os.system('cls' if os.name == 'nt' else 'clear')
         amount = n_dice()
 
-        if amount == '2' or amount == 'two':
+        if amount == 2:
             print('Rolando os dados...')
             dice_1 = random.randint(min_val, max_val)
             dice_2 = random.randint(min_val, max_val)
@@ -37,17 +37,13 @@ def roll_dice():
             print('Valores dos dados:')
             print('Dado 1:', dice_1)
             print('Dado 2:', dice_2)
-            print('Total:',dice_1 + dice_2)
-
-            roll_again = input('Rolar de novo?\n')
+            print('Total:', dice_1 + dice_2)
         else:
             print('Rolando dado...')
             dice_1 = random.randint(min_val, max_val)
             print(f'Valor do dado: {dice_1}')
 
-            roll_again = input('Rolar de novo?\n')
-
-
+        roll_again = input('Rolar de novo? (sim/s)\n')
 
 if __name__ == '__main__':
     roll_dice()
